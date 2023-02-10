@@ -1,11 +1,9 @@
+// packages name
 npm i express // backend server node
 npm i express-async-handler // used for making function async
 npm i mongoose // used for managing mongodb database
 npm i colors // used for coloring terminal output
 npm i dotenv // used for accessing env variables
-
+// for running the server
 npm i nodemon // used for running bacend server in debug mode
 npm i concurrently // to run backend and frontend simultaneously
-
-
-npm i express express-async-handler mongoose colors dotenv nodemon concurrently
