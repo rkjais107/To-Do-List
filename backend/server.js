@@ -2,6 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config(); // to read the files from  enviornment variable
 import colors from "colors";
+import connectDB from "./config/db.js";
+
+connectDB();
 
 // Global constants
 const port = process.env.PORT || 5000;
