@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true })); // Body parser
 
 // Root route
 app.get("/", (req, res) => {
-  res.send("Hello from the server.");
+  res.json({ message: "Hello from the server." });
 });
 
 // server listening on port 5000
