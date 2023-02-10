@@ -6,3 +6,6 @@ npm i dotenv // used for accessing env variables
 
 npm i nodemon // used for running bacend server in debug mode
 npm i concurrently // to run backend and frontend simultaneously
+
+
+npm i express express-async-handler mongoose colors dotenv nodemon concurrently
