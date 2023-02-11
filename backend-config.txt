@@ -22,5 +22,9 @@ A) listController.js
         a) request made to database -> constant lists save -> backend to databse
         b) lists data needed to send to frontend/postman -> backend to frontend
     2) createListItem
+        a) title, content, timestamp, -> data needed to be send to backend -> frontend to backend
+        b) data which received from frontend stored in backend variables.
+        c) data needed to be saved in database
+        d) send success status to frontend
     3) updateListItem
     4) deleteListItem
