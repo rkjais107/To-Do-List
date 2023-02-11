@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const listSchema = new Schema({
-  list: [
+  listname: String,
+  lists: [
     {
       title: String,
       content: String,
