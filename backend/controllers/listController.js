@@ -1,6 +1,9 @@
 import asyncHandler from "express-async-handler";
 import List from "../models/listModel.js";
 
+// @desc Get a list
+// @route GET /api/list
+// @access Public
 const getLists = asyncHandler(async (req, res) => {
   try {
     const lists = await List.find();
@@ -10,6 +13,9 @@ const getLists = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc  Create a list
+// @route POST /api/list
+// @access Public
 const createList = asyncHandler(async (req, res) => {
   try {
     // console.log(req.body);
@@ -31,6 +37,9 @@ const createList = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Add a list Item
+// @route GET /api/list/:id
+// @access Public
 const addListItem = asyncHandler(async (req, res) => {
   try {
     const { title, content, timestamp } = req.body;
