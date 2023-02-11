@@ -1,0 +1,10 @@
+config folder -> used for database configuration -> code same
+models folder -> used for coding of database schema
+routes folder -> used for defining routes -> eg get, put, post, del
+controllers folder -> used for coding login behiend each route
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+routes folder ->
+    1) GET /api/list -> get list of to-do-lists
+    2) POST /api/list -> create new list item
+    3) PUT /api/list/:id -> update a list item
+    4) DEL /api/list/:id -> delete a list item
