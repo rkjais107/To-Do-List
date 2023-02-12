@@ -98,4 +98,32 @@ const updateListItem = asyncHandler(async (req, res) => {
   }
 });
 
-export { getLists, createList, addListItem, deleteList, updateListItem };
+// delete a item in list
+const deleteListItem = asyncHandler(async (req, res) => {
+  try {
+    const list = await List.findById(req.params.id);
+    if (!list) {
+      return res.status(404).json({ message: "list not found" });
+    }
+    if (
+      list.lists.filter((item) => item._id.toString() === req.params.itemId)
+    ) {
+      list.lists = list.lists.filter(
+        (item) => item._id.toString() !== req.params.itemId
+      );
+    }
+    await list.save();
+    res.status(200).json({ message: "List item  deleted  successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+export {
+  getLists,
+  createList,
+  addListItem,
+  deleteList,
+  updateListItem,
+  deleteListItem,
+};
