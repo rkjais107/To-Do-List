@@ -4,6 +4,7 @@ import {
   createList,
   deleteList,
   getLists,
+  updateListItem,
 } from "../controllers/listController.js";
 
 const router = express.Router();
@@ -18,5 +19,7 @@ router.route("/").get(getLists).post(createList);
 // @access Public
 router.route("/:id").post(addListItem).delete(deleteList);
 // router.route(":id").put(updateListItem).delete(deleteListItem);
+
+router.route("/:listId/edit/:itemId").put(updateListItem);
 
 export default router;
