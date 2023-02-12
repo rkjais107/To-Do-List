@@ -101,7 +101,7 @@ const updateListItem = asyncHandler(async (req, res) => {
 // delete a item in list
 const deleteListItem = asyncHandler(async (req, res) => {
   try {
-    const list = await List.findById(req.params.id);
+    const list = await List.findById(req.params.listId);
     if (!list) {
       return res.status(404).json({ message: "list not found" });
     }
