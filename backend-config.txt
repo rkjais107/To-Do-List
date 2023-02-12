@@ -13,9 +13,11 @@ A) listModel.js
 routes folder -> 
 A) listRoutes.js
     1) GET /api/list -> get list of to-do- -> getLists
-    2) POST /api/list -> create new list item -> createListItem
-    3) PUT /api/list/:id -> update a list item -> updateListItem
-    4) DEL /api/list/:id -> delete a list item -> deleteListItem
+    2) POST /api/list -> create new list item -> createList
+    3) POST /api/list/:id -> add a item in a list -> addListItem
+    4) DEL /api/list/:id -> delete a list -> deleteList
+    5) PUT /api/list/:listId/edit/:itemId -> update a list item -> updateListItem
+    6) DEL /api/list/:listId/edit/:itemId -> delete a list item -> deleteListItem
 controllers folder ->
 A) listController.js
     1) getLists -> 
@@ -32,7 +34,11 @@ A) listController.js
         c) push new item in list
         d) save list
         e) suceess
-    3) updateListItem
-    4) deleteListItem
+    4) deleteList
+        a) 
+        b)
+        c)
+    5) updateListItem
+    6) deleteListItem
 
 list science list maths 
