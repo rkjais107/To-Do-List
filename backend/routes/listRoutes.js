@@ -2,6 +2,7 @@ import express from "express";
 import {
   addListItem,
   createList,
+  deleteList,
   getLists,
 } from "../controllers/listController.js";
 
@@ -15,7 +16,7 @@ router.route("/").get(getLists).post(createList);
 // @desc Add a list Item
 // @route GET /api/list/:id
 // @access Public
-router.route("/:id").post(addListItem);
+router.route("/:id").post(addListItem).delete(deleteList);
 // router.route(":id").put(updateListItem).delete(deleteListItem);
 
 export default router;
