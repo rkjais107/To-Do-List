@@ -1,4 +1,4 @@
-// packages name
+// packages name for backend
 npm i express // backend server node
 npm i express-async-handler // used for making function async
 npm i mongoose // used for managing mongodb database
@@ -7,3 +7,14 @@ npm i dotenv // used for accessing env variables
 // for running the server
 npm i nodemon // used for running bacend server in debug mode
 npm i concurrently // to run backend and frontend simultaneously
+
+// packages name for frontend
+npm i axios // it is used to send api request to backend
+npm i bootstrap // it is used for styling similar to css
+npm i  react-bootstrap // it is used for styling similar to css
+npm i react-redux // it is used for managing state
+npm i react-router-bootstrap // 
+npm i react-router-dom //
+npm i redux //
+npm i redux-thunk //
+npm i @redux-devtools/extension //
