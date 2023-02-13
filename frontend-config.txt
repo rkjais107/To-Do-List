@@ -1,5 +1,6 @@
 // To create default frontend folder using react
 npx create-react-app frontend
+
 // font awesome
 <link
       rel="stylesheet"
@@ -8,4 +9,7 @@ npx create-react-app frontend
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+// To-Do-List state management
+// Folder -> /frontend/src
 
