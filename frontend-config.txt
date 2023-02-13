@@ -11,5 +11,11 @@ npx create-react-app frontend
     />
 
 // To-Do-List state management
-// Folder -> /frontend/src
+// Folder -> /frontend/src/
+1) components
+2) screens
+3) constants -> redux state 
+4) reducers -> redux state 
+5) actions -> redux state 
+6) store.js -> local storage config file
 
