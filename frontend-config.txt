@@ -1,0 +1,3 @@
+// To create default frontend folder using react
+npx create-react-app frontend
+
