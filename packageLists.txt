@@ -11,7 +11,7 @@ npm i concurrently // to run backend and frontend simultaneously
 // packages name for frontend
 npm i axios // it is used to send api request to backend
 npm i bootstrap // it is used for styling similar to css
-npm i  react-bootstrap // it is used for styling similar to css
+npm i react-bootstrap // it is used for styling similar to css
 npm i react-redux // it is used for managing state
 npm i react-router-bootstrap // 
 npm i react-router-dom //
