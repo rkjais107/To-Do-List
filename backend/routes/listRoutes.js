@@ -4,6 +4,7 @@ import {
   createList,
   deleteList,
   deleteListItem,
+  getList,
   getLists,
   updateListItem,
 } from "../controllers/listController.js";
@@ -18,7 +19,7 @@ router.route("/").get(getLists).post(createList);
 // @desc Add a list Item
 // @route POST /api/list/:id
 // @access Public
-router.route("/:id").post(addListItem).delete(deleteList);
+router.route("/:id").get(getList).post(addListItem).delete(deleteList);
 // router.route(":id").put(updateListItem).delete(deleteListItem);
 
 router

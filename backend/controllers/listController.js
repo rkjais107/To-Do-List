@@ -13,6 +13,21 @@ const getLists = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Get a list
+// @route GET /api/list/:id
+// @access Public
+const getList = asyncHandler(async (req, res) => {
+  try {
+    const list = await List.findById(req.params.id);
+    if (!list) {
+      return res.status(404).json({ message: "list not found" });
+    }
+    res.json(list);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc  Create a list
 // @route POST /api/list
 // @access Public
@@ -123,4 +138,5 @@ export {
   deleteList,
   updateListItem,
   deleteListItem,
+  getList,
 };
