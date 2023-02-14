@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import HomeScreen from "./screens/HomeScreen";
+import ListScreen from "./screens/ListScreen";
 import Header from "./components/Header";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <main className="py-3">
         <Container>
           <Routes>
-            <Route path="/" element={<HomeScreen />} />
+            <Route path="/lists/:listId" element={<ListScreen />} />
           </Routes>
         </Container>
       </main>
