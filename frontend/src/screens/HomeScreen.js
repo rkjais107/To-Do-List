@@ -10,7 +10,7 @@ const HomeScreen = () => {
   };
   return (
     <>
-      <h1>HomeScreen</h1>
+      <h1>LISTSCREEN</h1>
       <Container
         style={{ backgroundColor: "blue", height: "500px", width: "100%" }}
       >

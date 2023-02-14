@@ -16,7 +16,7 @@ const router = express.Router();
 router.route("/").get(getLists).post(createList);
 
 // @desc Add a list Item
-// @route GET /api/list/:id
+// @route POST /api/list/:id
 // @access Public
 router.route("/:id").post(addListItem).delete(deleteList);
 // router.route(":id").put(updateListItem).delete(deleteListItem);
