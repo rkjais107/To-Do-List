@@ -4,7 +4,6 @@ const listSchema = new Schema({
   listname: String,
   lists: [
     {
-      title: String,
       content: String,
       timestamp: String,
       createdAt: { type: Date, default: Date.now() },

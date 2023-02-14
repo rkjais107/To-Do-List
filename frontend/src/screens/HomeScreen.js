@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const HomeScreen = () => {
-  const [comment, setComment] = useState("");
+  const [content, setContent] = useState("");
+  const [timestamp, setTimestamp] = useState("");
+
   const postSubmitHandler = () => {
     console.log("Comment Added!");
   };
@@ -23,17 +25,29 @@ const HomeScreen = () => {
             <Form onSubmit={postSubmitHandler}>
               <input
                 type="text"
-                placeholder="Add a comment..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                placeholder="Add..."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
                 style={{
-                  width: "80%",
+                  width: "30%",
                   padding: "12px 20px",
                   borderRadius: "10px",
                   marginRight: "5px",
                 }}
               />
-              {comment && (
+              <input
+                type="text"
+                placeholder="Add a timestamp..."
+                value={timestamp}
+                onChange={(e) => setTimestamp(e.target.value)}
+                style={{
+                  width: "30%",
+                  padding: "12px 20px",
+                  borderRadius: "10px",
+                  marginRight: "5px",
+                }}
+              />
+              {content && (
                 <Button type="submit" variant="primary" className="form-margin">
                   Post
                 </Button>
