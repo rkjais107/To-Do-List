@@ -19,9 +19,8 @@ const getLists = asyncHandler(async (req, res) => {
 const createList = asyncHandler(async (req, res) => {
   try {
     // console.log(req.body);
-    const { listname, title, content, timestamp } = req.body;
+    const { listname, content, timestamp } = req.body;
     const newListItem = {
-      title,
       content,
       timestamp,
     };
@@ -42,13 +41,12 @@ const createList = asyncHandler(async (req, res) => {
 // @access Public
 const addListItem = asyncHandler(async (req, res) => {
   try {
-    const { title, content, timestamp } = req.body;
+    const { content, timestamp } = req.body;
     const list = await List.findById(req.params.id);
     if (!list) {
       return res.status(404).json({ message: "list not found" });
     }
     const newListItem = {
-      title,
       content,
       timestamp,
     };
@@ -76,7 +74,7 @@ const deleteList = asyncHandler(async (req, res) => {
 // update list items
 const updateListItem = asyncHandler(async (req, res) => {
   try {
-    const { title, content, timestamp } = req.body;
+    const { content, timestamp } = req.body;
     const list = await List.findById(req.params.listId);
     if (!list) {
       return res.status(404).json({ message: "list not found" });
@@ -87,7 +85,6 @@ const updateListItem = asyncHandler(async (req, res) => {
       let itemToUpdate = list.lists.filter(
         (item) => item._id.toString() === req.params.itemId
       )[0];
-      itemToUpdate.title = title || itemToUpdate.title;
       itemToUpdate.content = content || itemToUpdate.content;
       itemToUpdate.timestamp = timestamp || itemToUpdate.timestamp;
     }
