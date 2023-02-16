@@ -35,7 +35,7 @@ const HomeScreen = () => {
                         color: "black",
                         fontWeight: "bold",
                       }}
-                      to={`/lists/${list._id}`}
+                      to={`/list/${list._id}`}
                     >
                       {list._id}
                     </Link>

@@ -13,7 +13,7 @@ function App() {
       <main className="py-3">
         <Container>
           <Routes>
-            <Route path="/lists/:listId" element={<ListScreen />} />
+            <Route path="/list/:listId" element={<ListScreen />} />
             <Route path="/" element={<HomeScreen />} />
           </Routes>
         </Container>
