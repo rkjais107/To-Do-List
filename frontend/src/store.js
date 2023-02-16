@@ -4,6 +4,7 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 import {
   allListsReducer,
   createListReducer,
+  deleteListReducer,
   individualListReducer,
 } from "./reducers/listsReducers";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   allLists: allListsReducer,
   individualList: individualListReducer,
   createList: createListReducer,
+  deleteList: deleteListReducer,
 });
 
 const initialState = {};
