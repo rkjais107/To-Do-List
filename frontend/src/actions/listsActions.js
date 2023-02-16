@@ -5,6 +5,9 @@ import {
   CREATE_LIST_FAIL,
   CREATE_LIST_REQUEST,
   CREATE_LIST_SUCCESS,
+  DELETE_LIST_FAIL,
+  DELETE_LIST_REQUEST,
+  DELETE_LIST_SUCCESS,
   INDIVIDUAL_LIST_FAIL,
   INDIVIDUAL_LIST_REQUEST,
   INDIVIDUAL_LIST_SUCCESS,
@@ -82,6 +85,30 @@ export const postCreateList = (listname, content, timestamp) => async (
   } catch (error) {
     dispatch({
       type: CREATE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteList = (listId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: DELETE_LIST_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.delete(`/api/list/${listId}`, config); //backend route
+    dispatch({
+      type: DELETE_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
