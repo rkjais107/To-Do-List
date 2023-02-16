@@ -13,6 +13,7 @@ function App() {
         <Container>
           <Routes>
             <Route path="/lists/:listId" element={<ListScreen />} />
+            <Route path="/" element={<HomeScreen />} />
           </Routes>
         </Container>
       </main>
