@@ -22,6 +22,11 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(getAllLists());
+    if (createList) {
+      setListname("");
+      setContent("");
+      setTimestamp("");
+    }
   }, [dispatch, createlist]);
 
   const createListHandler = (e) => {
