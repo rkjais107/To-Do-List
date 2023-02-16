@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import {
   allListsReducer,
+  createListReducer,
   individualListReducer,
 } from "./reducers/listsReducers";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10,6 +11,7 @@ import {
 const reducer = combineReducers({
   allLists: allListsReducer,
   individualList: individualListReducer,
+  createList: createListReducer,
 });
 
 const initialState = {};
