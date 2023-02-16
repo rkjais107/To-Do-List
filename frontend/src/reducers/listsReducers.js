@@ -2,6 +2,9 @@ import {
   ALL_LISTS_FAIL,
   ALL_LISTS_REQUEST,
   ALL_LISTS_SUCCESS,
+  CREATE_LIST_FAIL,
+  CREATE_LIST_REQUEST,
+  CREATE_LIST_SUCCESS,
   INDIVIDUAL_LIST_FAIL,
   INDIVIDUAL_LIST_REQUEST,
   INDIVIDUAL_LIST_SUCCESS,
@@ -27,6 +30,19 @@ export const individualListReducer = (state = { list: {} }, action) => {
     case INDIVIDUAL_LIST_SUCCESS:
       return { loading: false, list: action.payload };
     case INDIVIDUAL_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const createListReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CREATE_LIST_REQUEST:
+      return { ...state, loading: true };
+    case CREATE_LIST_SUCCESS:
+      return { loading: false, createlist: action.payload };
+    case CREATE_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
