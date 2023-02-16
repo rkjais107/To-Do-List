@@ -40,7 +40,7 @@ export const getIndividualList = (listId) => async (dispatch, getState) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.get(`/api/list/${listId}`, config);
+    const { data } = await axios.get(`/api/list/${listId}`, config); //backend route
     dispatch({
       type: INDIVIDUAL_LIST_SUCCESS,
       payload: data,
