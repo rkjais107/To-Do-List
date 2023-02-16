@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllLists, postCreateList } from "../actions/listsActions";
+import {
+  delDeleteList,
+  getAllLists,
+  postCreateList,
+} from "../actions/listsActions";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -18,7 +22,10 @@ const HomeScreen = () => {
   const { loading, error, lists } = allLists;
 
   const createList = useSelector((state) => state.createList);
-  const { loading: createLoading, error: createError, createlist } = createList;
+  const { createlist } = createList;
+
+  const deleteList = useSelector((state) => state.deleteList);
+  const { deletelist } = deleteList;
 
   useEffect(() => {
     dispatch(getAllLists());
@@ -27,7 +34,7 @@ const HomeScreen = () => {
       setContent("");
       setTimestamp("");
     }
-  }, [dispatch, createlist]);
+  }, [dispatch, createlist, deletelist]);
 
   const createListHandler = (e) => {
     e.preventDefault();
@@ -36,6 +43,7 @@ const HomeScreen = () => {
 
   const deleteListHandler = (listId) => {
     console.log("delete");
+    dispatch(delDeleteList(listId));
   };
 
   return (

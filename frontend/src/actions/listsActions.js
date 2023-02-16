@@ -93,7 +93,7 @@ export const postCreateList = (listname, content, timestamp) => async (
   }
 };
 
-export const deleteList = (listId) => async (dispatch, getState) => {
+export const delDeleteList = (listId) => async (dispatch, getState) => {
   try {
     dispatch({ type: DELETE_LIST_REQUEST });
     const config = {
