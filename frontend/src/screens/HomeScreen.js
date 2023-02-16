@@ -49,8 +49,8 @@ const HomeScreen = () => {
                 {lists
                   ? lists.map((list) => (
                       <Row>
-                        <p>
-                          {list.listname} -{" "}
+                        <p style={{ fontSize: "30px" }}>
+                          <i class="fa-solid fa-list"></i> {list.listname}{" "}
                           <Link
                             style={{
                               textDecoration: "none",
@@ -59,7 +59,7 @@ const HomeScreen = () => {
                             }}
                             to={`/list/${list._id}`}
                           >
-                            {list._id}
+                            <i class="fa-solid fa-arrow-right"></i>
                           </Link>
                         </p>
                       </Row>
