@@ -96,6 +96,7 @@ const HomeScreen = () => {
                   value={listname}
                   onChange={(e) => setListname(e.target.value)}
                   autoComplete="none"
+                  required
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="content" className="form-margin">
@@ -103,11 +104,14 @@ const HomeScreen = () => {
                   <strong>content</strong>
                 </Form.Label>
                 <Form.Control
-                  type="text"
+                  as="textarea"
+                  rows="5"
+                  style={{ resize: "none" }}
                   placeholder="Enter content"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   autoComplete="none"
+                  required
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="timestamp" className="form-margin">
@@ -120,6 +124,7 @@ const HomeScreen = () => {
                   value={timestamp}
                   onChange={(e) => setTimestamp(e.target.value)}
                   autoComplete="none"
+                  required
                 ></Form.Control>
               </Form.Group>
               <Button type="submit" variant="primary" className="form-margin">
