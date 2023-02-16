@@ -25,6 +25,8 @@ Flow to manage redux =
       success
       fail
 4) reducers -> redux state 
+    a) listsReducers.js
+      allListsReducer
 5) actions -> redux state 
 6) store.js -> local storage config file
   // store.js code 
