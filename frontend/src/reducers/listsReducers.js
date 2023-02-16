@@ -39,7 +39,7 @@ export const individualListReducer = (state = { list: {} }, action) => {
 export const createListReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_LIST_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
     case CREATE_LIST_SUCCESS:
       return { loading: false, createlist: action.payload };
     case CREATE_LIST_FAIL:
