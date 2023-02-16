@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllLists } from "../actions/listsActions";
+import { getAllLists, postCreateList } from "../actions/listsActions";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -17,12 +17,16 @@ const HomeScreen = () => {
   const allLists = useSelector((state) => state.allLists);
   const { loading, error, lists } = allLists;
 
+  const createList = useSelector((state) => state.createList);
+  const { loading: createLoading, error: createError, createlist } = createList;
+
   useEffect(() => {
     dispatch(getAllLists());
-  }, [dispatch]);
+  }, [dispatch, createlist]);
 
-  const submitHandler = (e) => {
+  const createListHandler = (e) => {
     e.preventDefault();
+    dispatch(postCreateList(listname, content, timestamp));
   };
 
   return (
@@ -76,7 +80,7 @@ const HomeScreen = () => {
           <FormContainer>
             {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader />}
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={createListHandler}>
               <Form.Group controlId="listname" className="form-margin">
                 <Form.Label>
                   <strong>listname</strong>
