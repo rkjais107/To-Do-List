@@ -14,7 +14,16 @@ npx create-react-app frontend
 // Folder -> /frontend/src/
 1) components
 2) screens
+Flow to manage redux =
+  a) create constants.
+  b) create reducer.
+  c) add reducer to store.
+  d) create actions.
 3) constants -> redux state 
+    a) listsConstants.js
+      request
+      success
+      fail
 4) reducers -> redux state 
 5) actions -> redux state 
 6) store.js -> local storage config file
