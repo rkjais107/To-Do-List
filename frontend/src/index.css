@@ -1,11 +1,15 @@
 body {
-  height: 100%;
+  min-height: 100%;
   width: 100%;
 }
 
 main {
-  height: 500px;
+  height: 80vh;
   width: 100%;
+}
+
+.form-margin {
+  margin-top: 5%;
 }
 
 footer {
