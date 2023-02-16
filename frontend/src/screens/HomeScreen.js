@@ -34,6 +34,10 @@ const HomeScreen = () => {
     dispatch(postCreateList(listname, content, timestamp));
   };
 
+  const deleteListHandler = (listId) => {
+    console.log("delete");
+  };
+
   return (
     <>
       {error && <Message variant="danger">{error}</Message>}
@@ -59,7 +63,7 @@ const HomeScreen = () => {
                   ? lists.map((list) => (
                       <Row>
                         <p style={{ fontSize: "30px" }}>
-                          <i class="fa-solid fa-list"></i> {list.listname}{" "}
+                          <i class="fa-solid fa-list"></i>{" "}
                           <Link
                             style={{
                               textDecoration: "none",
@@ -68,8 +72,17 @@ const HomeScreen = () => {
                             }}
                             to={`/list/${list._id}`}
                           >
-                            <i class="fa-solid fa-arrow-right"></i>
+                            {list.listname}
                           </Link>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <i
+                            style={{
+                              cursor: "pointer",
+                              marginLeft: "10px",
+                            }}
+                            class="fa-regular fa-trash-can"
+                            onClick={() => deleteListHandler(list._id)}
+                          ></i>
                         </p>
                       </Row>
                     ))
