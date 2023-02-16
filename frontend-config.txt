@@ -27,9 +27,11 @@ Flow to manage redux =
 4) reducers -> redux state 
     a) listsReducers.js
       allListsReducer
+      individualListReducer
 5) actions -> redux state 
     a) listsActions.js
     getAllLists
+    getIndividualList
 6) store.js -> local storage config file
   // store.js code 
   import { createStore, combineReducers, applyMiddleware } from "redux";
