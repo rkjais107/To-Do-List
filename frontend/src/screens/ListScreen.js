@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getIndividualList, postCreateItemList } from "../actions/listsActions";
+import {
+  delDeleteItemList,
+  getIndividualList,
+  postCreateItemList,
+} from "../actions/listsActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import { INDIVIDUAL_LIST_RESET } from "../constants/listsConstants";
 
 const ListScreen = () => {
   const [listname, setListname] = useState("");
@@ -22,6 +27,9 @@ const ListScreen = () => {
   const createItemList = useSelector((state) => state.createItemList);
   const { createitemlist } = createItemList;
 
+  const deleteListItem = useSelector((state) => state.deleteListItem);
+  const { deleteitemlist } = deleteListItem;
+
   useEffect(() => {
     if (!list || !list.lists) {
       dispatch(getIndividualList(paramslistId));
@@ -33,7 +41,7 @@ const ListScreen = () => {
       setContent("");
       setTimestamp("");
     }
-  }, [dispatch, paramslistId, list, createitemlist]);
+  }, [dispatch, paramslistId, list, createitemlist, deleteitemlist]);
 
   const addItemsHandler = () => {
     dispatch(
@@ -44,7 +52,15 @@ const ListScreen = () => {
       })
     );
   };
-  const deleteItemHandler = (itemId) => {};
+  const deleteItemHandler = (itemId) => {
+    dispatch(
+      delDeleteItemList({
+        listId: paramslistId,
+        itemId: itemId,
+      })
+    );
+    dispatch({ type: INDIVIDUAL_LIST_RESET });
+  };
   const editItemHandler = () => {};
   return (
     <>
