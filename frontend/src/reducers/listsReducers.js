@@ -9,6 +9,9 @@ import {
   CREATE_LIST_REQUEST,
   CREATE_LIST_SUCCESS,
   DELETE_LIST_FAIL,
+  DELETE_LIST_ITEM_FAIL,
+  DELETE_LIST_ITEM_REQUEST,
+  DELETE_LIST_ITEM_SUCCESS,
   DELETE_LIST_REQUEST,
   DELETE_LIST_SUCCESS,
   INDIVIDUAL_LIST_FAIL,
@@ -78,6 +81,19 @@ export const createItemListReducer = (state = {}, action) => {
     case CREATE_LIST_ITEM_SUCCESS:
       return { loading: false, createitemlist: action.payload };
     case CREATE_LIST_ITEM_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const deleteListItemReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DELETE_LIST_ITEM_REQUEST:
+      return { loading: true };
+    case DELETE_LIST_ITEM_SUCCESS:
+      return { loading: false, deleteitemlist: action.payload };
+    case DELETE_LIST_ITEM_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
