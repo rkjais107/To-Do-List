@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getIndividualList } from "../actions/listsActions";
+import { getIndividualList, postCreateItemList } from "../actions/listsActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
@@ -18,16 +18,29 @@ const ListScreen = () => {
   const individualList = useSelector((state) => state.individualList);
   const { loading, error, list } = individualList;
 
+  const createItemList = useSelector((state) => state.createItemList);
+  const { createitemlist } = createItemList;
+
   useEffect(() => {
     if (!list || !list.lists) {
       dispatch(getIndividualList(paramslistId));
     } else {
       setItems(list.lists);
     }
-  }, [dispatch, paramslistId, list]);
+    if (createitemlist) {
+      setContent("");
+      setTimestamp("");
+    }
+  }, [dispatch, paramslistId, list, createitemlist]);
 
-  const postSubmitHandler = () => {
-    console.log("Comment Added!");
+  const addItemsHandler = () => {
+    dispatch(
+      postCreateItemList({
+        listId: paramslistId,
+        content: content,
+        timestamp: timestamp,
+      })
+    );
   };
 
   return (
@@ -59,7 +72,7 @@ const ListScreen = () => {
           <div style={{ marginTop: "12px" }}>
             <Form
               style={{ display: "flex", alignItems: "center" }}
-              onSubmit={postSubmitHandler}
+              onSubmit={addItemsHandler}
             >
               <input
                 type="text"

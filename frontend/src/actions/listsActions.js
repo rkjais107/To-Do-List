@@ -120,7 +120,7 @@ export const delDeleteList = (listId) => async (dispatch, getState) => {
   }
 };
 
-export const postCreateItemList = (listId, content, timestamp) => async (
+export const postCreateItemList = ({ listId, content, timestamp }) => async (
   dispatch,
   getState
 ) => {
