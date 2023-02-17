@@ -44,7 +44,7 @@ const ListScreen = () => {
       })
     );
   };
-  const deleteItemHandler = () => {};
+  const deleteItemHandler = (itemId) => {};
   const editItemHandler = () => {};
   return (
     <>
@@ -73,7 +73,7 @@ const ListScreen = () => {
                       marginLeft: "10px",
                     }}
                     class="fa-solid fa-pen-to-square"
-                    onClick={() => editItemHandler(list._id)}
+                    onClick={() => editItemHandler(item._id)}
                   ></i>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <i
@@ -82,7 +82,7 @@ const ListScreen = () => {
                       marginLeft: "10px",
                     }}
                     class="fa-regular fa-trash-can"
-                    onClick={() => deleteItemHandler(list._id)}
+                    onClick={() => deleteItemHandler(item._id)}
                   ></i>
                 </h5>
               ))}
