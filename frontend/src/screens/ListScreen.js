@@ -57,7 +57,10 @@ const ListScreen = () => {
         </Row>
         <Row style={{ backgroundColor: "red", height: "15%", width: "100%" }}>
           <div style={{ marginTop: "12px" }}>
-            <Form onSubmit={postSubmitHandler}>
+            <Form
+              style={{ display: "flex", alignItems: "center" }}
+              onSubmit={postSubmitHandler}
+            >
               <input
                 type="text"
                 placeholder="Add..."
@@ -68,6 +71,7 @@ const ListScreen = () => {
                   padding: "12px 20px",
                   borderRadius: "10px",
                   marginRight: "5px",
+                  verticalAlign: "middle",
                 }}
               />
               <input
@@ -80,10 +84,11 @@ const ListScreen = () => {
                   padding: "12px 20px",
                   borderRadius: "10px",
                   marginRight: "5px",
+                  verticalAlign: "middle",
                 }}
               />
               {content && (
-                <Button type="submit" variant="primary" className="form-margin">
+                <Button type="submit" variant="primary">
                   Post
                 </Button>
               )}
