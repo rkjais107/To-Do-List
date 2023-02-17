@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import {
   allListsReducer,
+  createItemListReducer,
   createListReducer,
   deleteListReducer,
   individualListReducer,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   individualList: individualListReducer,
   createList: createListReducer,
   deleteList: deleteListReducer,
+  createItemList: createItemListReducer,
 });
 
 const initialState = {};
