@@ -5,6 +5,7 @@ import {
   allListsReducer,
   createItemListReducer,
   createListReducer,
+  deleteListItemReducer,
   deleteListReducer,
   individualListReducer,
 } from "./reducers/listsReducers";
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   createList: createListReducer,
   deleteList: deleteListReducer,
   createItemList: createItemListReducer,
+  deleteListItem: deleteListItemReducer,
 });
 
 const initialState = {};
