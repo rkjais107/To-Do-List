@@ -13,6 +13,7 @@ import {
   DELETE_LIST_SUCCESS,
   INDIVIDUAL_LIST_FAIL,
   INDIVIDUAL_LIST_REQUEST,
+  INDIVIDUAL_LIST_RESET,
   INDIVIDUAL_LIST_SUCCESS,
 } from "../constants/listsConstants";
 
@@ -37,6 +38,8 @@ export const individualListReducer = (state = { list: {} }, action) => {
       return { loading: false, list: action.payload };
     case INDIVIDUAL_LIST_FAIL:
       return { loading: false, error: action.payload };
+    case INDIVIDUAL_LIST_RESET:
+      return {};
     default:
       return state;
   }

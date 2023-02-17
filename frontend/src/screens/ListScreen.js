@@ -7,6 +7,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 
 const ListScreen = () => {
+  const [listname, setListname] = useState("");
   const [content, setContent] = useState("");
   const [timestamp, setTimestamp] = useState("");
   const [items, setItems] = useState([]);
@@ -26,6 +27,7 @@ const ListScreen = () => {
       dispatch(getIndividualList(paramslistId));
     } else {
       setItems(list.lists);
+      setListname(list.listname);
     }
     if (createitemlist) {
       setContent("");
@@ -42,7 +44,8 @@ const ListScreen = () => {
       })
     );
   };
-
+  const deleteItemHandler = () => {};
+  const editItemHandler = () => {};
   return (
     <>
       <h1>LISTSCREEN</h1>
@@ -53,7 +56,7 @@ const ListScreen = () => {
         <Row
           style={{ backgroundColor: "violet", height: "15%", width: "100%" }}
         >
-          <h2>{list.listname}</h2>
+          <h2>{loading ? <Loader /> : listname}</h2>
         </Row>
         <Row style={{ backgroundColor: "green", height: "70%", width: "100%" }}>
           {loading ? (
@@ -61,9 +64,27 @@ const ListScreen = () => {
           ) : (
             <div>
               {items.map((item) => (
-                <p>
+                <h5>
                   {item.content} - {item.timestamp}
-                </p>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i
+                    style={{
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                    class="fa-solid fa-pen-to-square"
+                    onClick={() => editItemHandler(list._id)}
+                  ></i>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i
+                    style={{
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                    }}
+                    class="fa-regular fa-trash-can"
+                    onClick={() => deleteItemHandler(list._id)}
+                  ></i>
+                </h5>
               ))}
             </div>
           )}
