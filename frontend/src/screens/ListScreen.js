@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getIndividualList } from "../actions/listsActions";
 import Message from "../components/Message";
+import Loader from "../components/Loader";
 
 const ListScreen = () => {
   const [content, setContent] = useState("");
   const [timestamp, setTimestamp] = useState("");
+  const [items, setItems] = useState([]);
+
   const dispatch = useDispatch();
   const params = useParams();
   const paramslistId = params.listId;
@@ -16,8 +19,12 @@ const ListScreen = () => {
   const { loading, error, list } = individualList;
 
   useEffect(() => {
-    dispatch(getIndividualList(paramslistId));
-  }, [dispatch, paramslistId]);
+    if (!list || !list.lists) {
+      dispatch(getIndividualList(paramslistId));
+    } else {
+      setItems(list.lists);
+    }
+  }, [dispatch, paramslistId, list]);
 
   const postSubmitHandler = () => {
     console.log("Comment Added!");
@@ -35,9 +42,19 @@ const ListScreen = () => {
         >
           <h2>{list.listname}</h2>
         </Row>
-        <Row
-          style={{ backgroundColor: "green", height: "70%", width: "100%" }}
-        ></Row>
+        <Row style={{ backgroundColor: "green", height: "70%", width: "100%" }}>
+          {loading ? (
+            <Loader />
+          ) : (
+            <div>
+              {items.map((item) => (
+                <p>
+                  {item.content} - {item.timestamp}
+                </p>
+              ))}
+            </div>
+          )}
+        </Row>
         <Row style={{ backgroundColor: "red", height: "15%", width: "100%" }}>
           <div style={{ marginTop: "12px" }}>
             <Form onSubmit={postSubmitHandler}>
