@@ -3,6 +3,9 @@ import {
   ALL_LISTS_REQUEST,
   ALL_LISTS_SUCCESS,
   CREATE_LIST_FAIL,
+  CREATE_LIST_ITEM_FAIL,
+  CREATE_LIST_ITEM_REQUEST,
+  CREATE_LIST_ITEM_SUCCESS,
   CREATE_LIST_REQUEST,
   CREATE_LIST_SUCCESS,
   DELETE_LIST_FAIL,
@@ -109,6 +112,37 @@ export const delDeleteList = (listId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: DELETE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const postCreateItemList = (listId, content, timestamp) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({ type: CREATE_LIST_ITEM_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      `/api/list/${listId}`,
+      { content, timestamp },
+      config
+    ); //backend route
+    dispatch({
+      type: CREATE_LIST_ITEM_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: CREATE_LIST_ITEM_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
