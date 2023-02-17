@@ -28,10 +28,10 @@ const ListScreen = () => {
   const { createitemlist } = createItemList;
 
   const deleteListItem = useSelector((state) => state.deleteListItem);
-  const { deleteitemlist } = deleteListItem;
+  const { loading: loadingdeletelist, deleteitemlist } = deleteListItem;
 
   useEffect(() => {
-    if (!list || !list.lists) {
+    if (!list || !list.lists || loadingdeletelist) {
       dispatch(getIndividualList(paramslistId));
     } else {
       setItems(list.lists);
@@ -41,7 +41,14 @@ const ListScreen = () => {
       setContent("");
       setTimestamp("");
     }
-  }, [dispatch, paramslistId, list, createitemlist, deleteitemlist]);
+  }, [
+    dispatch,
+    paramslistId,
+    list,
+    createitemlist,
+    deleteitemlist,
+    loadingdeletelist,
+  ]);
 
   const addItemsHandler = () => {
     dispatch(
@@ -59,7 +66,6 @@ const ListScreen = () => {
         itemId: itemId,
       })
     );
-    dispatch({ type: INDIVIDUAL_LIST_RESET });
   };
   const editItemHandler = () => {};
   return (
