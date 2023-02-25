@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   delDeleteItemList,
+  getGetItemList,
   getIndividualList,
   postCreateItemList,
 } from "../actions/listsActions";
@@ -14,6 +15,7 @@ import { INDIVIDUAL_LIST_RESET } from "../constants/listsConstants";
 const ListScreen = () => {
   const [listname, setListname] = useState("");
   const [content, setContent] = useState("");
+  const [updatebutton, setUpdatebutton] = useState(false);
   const [timestamp, setTimestamp] = useState("");
   const [items, setItems] = useState([]);
 
@@ -30,8 +32,11 @@ const ListScreen = () => {
   const deleteListItem = useSelector((state) => state.deleteListItem);
   const { loading: loadingdeletelist, deleteitemlist } = deleteListItem;
 
+  const getListItem = useSelector((state) => state.getListItem);
+  const { loading: loadinggetlistitem, getitemlist } = getListItem;
+
   useEffect(() => {
-    if (!list || !list.lists || loadingdeletelist) {
+    if (!list || !list.lists || loadingdeletelist || loadinggetlistitem) {
       dispatch(getIndividualList(paramslistId));
     } else {
       setItems(list.lists);
@@ -41,6 +46,11 @@ const ListScreen = () => {
       setContent("");
       setTimestamp("");
     }
+    if (getitemlist) {
+      setContent(getitemlist.content);
+      setTimestamp(getitemlist.timestamp);
+      setUpdatebutton(true);
+    }
   }, [
     dispatch,
     paramslistId,
@@ -48,16 +58,26 @@ const ListScreen = () => {
     createitemlist,
     deleteitemlist,
     loadingdeletelist,
+    loadinggetlistitem,
+    getitemlist,
   ]);
 
   const addItemsHandler = () => {
-    dispatch(
-      postCreateItemList({
-        listId: paramslistId,
-        content: content,
-        timestamp: timestamp,
-      })
-    );
+    if (updatebutton) {
+      console.log("data edited");
+      // dispatch
+      setUpdatebutton(false);
+      setContent("");
+      setTimestamp("");
+    } else {
+      dispatch(
+        postCreateItemList({
+          listId: paramslistId,
+          content: content,
+          timestamp: timestamp,
+        })
+      );
+    }
   };
   const deleteItemHandler = (itemId) => {
     dispatch(
@@ -67,7 +87,15 @@ const ListScreen = () => {
       })
     );
   };
-  const editItemHandler = () => {};
+  const editItemHandler = (itemId) => {
+    dispatch(
+      getGetItemList({
+        listId: paramslistId,
+        itemId: itemId,
+      })
+    );
+  };
+
   return (
     <>
       <h1>LISTSCREEN</h1>
@@ -143,9 +171,14 @@ const ListScreen = () => {
                   verticalAlign: "middle",
                 }}
               />
-              {content && (
+              {content && !updatebutton && (
                 <Button type="submit" variant="primary">
                   Post
+                </Button>
+              )}
+              {updatebutton && (
+                <Button type="submit" variant="primary">
+                  Update
                 </Button>
               )}
             </Form>
