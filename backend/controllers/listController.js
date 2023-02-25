@@ -131,6 +131,31 @@ const deleteListItem = asyncHandler(async (req, res) => {
   }
 });
 
+// get a item in list
+const getListItem = asyncHandler(async (req, res) => {
+  try {
+    const list = await List.findById(req.params.listId);
+    if (!list) {
+      return res.status(404).json({ message: "list not found" });
+    }
+    if (
+      list.lists.filter((item) => item._id.toString() === req.params.itemId)
+    ) {
+      res
+        .status(200)
+        .send(
+          list.lists.filter(
+            (item) => item._id.toString() === req.params.itemId
+          )[0]
+        );
+    } else {
+      res.status(404).json({ message: "List item  not found." });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export {
   getLists,
   createList,
@@ -139,4 +164,5 @@ export {
   updateListItem,
   deleteListItem,
   getList,
+  getListItem,
 };
