@@ -14,6 +14,10 @@ import {
   DELETE_LIST_ITEM_SUCCESS,
   DELETE_LIST_REQUEST,
   DELETE_LIST_SUCCESS,
+  GET_LIST_ITEM_FAIL,
+  GET_LIST_ITEM_REQUEST,
+  GET_LIST_ITEM_RESET,
+  GET_LIST_ITEM_SUCCESS,
   INDIVIDUAL_LIST_FAIL,
   INDIVIDUAL_LIST_REQUEST,
   INDIVIDUAL_LIST_RESET,
@@ -95,6 +99,21 @@ export const deleteListItemReducer = (state = {}, action) => {
       return { loading: false, deleteitemlist: action.payload };
     case DELETE_LIST_ITEM_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const getListItemReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_LIST_ITEM_REQUEST:
+      return { loading: true };
+    case GET_LIST_ITEM_SUCCESS:
+      return { loading: false, getitemlist: action.payload };
+    case GET_LIST_ITEM_FAIL:
+      return { loading: false, error: action.payload };
+    case GET_LIST_ITEM_RESET:
+      return {};
     default:
       return state;
   }
