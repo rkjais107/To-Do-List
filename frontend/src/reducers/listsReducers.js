@@ -22,6 +22,10 @@ import {
   INDIVIDUAL_LIST_REQUEST,
   INDIVIDUAL_LIST_RESET,
   INDIVIDUAL_LIST_SUCCESS,
+  UPDATE_LIST_ITEM_FAIL,
+  UPDATE_LIST_ITEM_REQUEST,
+  UPDATE_LIST_ITEM_RESET,
+  UPDATE_LIST_ITEM_SUCCESS,
 } from "../constants/listsConstants";
 
 export const allListsReducer = (state = { lists: [] }, action) => {
@@ -113,6 +117,21 @@ export const getListItemReducer = (state = {}, action) => {
     case GET_LIST_ITEM_FAIL:
       return { loading: false, error: action.payload };
     case GET_LIST_ITEM_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const updateListItemReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_LIST_ITEM_REQUEST:
+      return { loading: true };
+    case UPDATE_LIST_ITEM_SUCCESS:
+      return { loading: false, updateitemlist: action.payload };
+    case UPDATE_LIST_ITEM_FAIL:
+      return { loading: false, error: action.payload };
+    case UPDATE_LIST_ITEM_RESET:
       return {};
     default:
       return state;
