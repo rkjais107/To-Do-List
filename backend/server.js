@@ -19,6 +19,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello from the server." });
 });
 
+// Using errorMiddleware
+app.use(notFound);
+app.use(errorHandler);
+
 // server listening on port 5000
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

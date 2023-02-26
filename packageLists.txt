@@ -18,3 +18,7 @@ npm i react-router-dom //
 npm i redux //
 npm i redux-thunk //
 npm i @redux-devtools/extension //
+
+// packages name for Authentication
+npm i jsonwebtoken // used to generate json web token for Authentication
+npm i bcrypt bcryptjs // used to hash password in database
