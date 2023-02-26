@@ -7,12 +7,17 @@ import {
   getGetItemList,
   getIndividualList,
   postCreateItemList,
+  updateItemList,
 } from "../actions/listsActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { INDIVIDUAL_LIST_RESET } from "../constants/listsConstants";
+import {
+  INDIVIDUAL_LIST_RESET,
+  UPDATE_LIST_ITEM_RESET,
+} from "../constants/listsConstants";
 
 const ListScreen = () => {
+  const [itemIdUpdate, setItemIdUpdate] = useState("");
   const [listname, setListname] = useState("");
   const [content, setContent] = useState("");
   const [updatebutton, setUpdatebutton] = useState(false);
@@ -35,14 +40,23 @@ const ListScreen = () => {
   const getListItem = useSelector((state) => state.getListItem);
   const { loading: loadinggetlistitem, getitemlist } = getListItem;
 
+  const updateListItem = useSelector((state) => state.updateListItem);
+  const { loading: loadingupdateitemlist, updateitemlist } = updateListItem;
+
   useEffect(() => {
-    if (!list || !list.lists || loadingdeletelist || loadinggetlistitem) {
+    if (
+      !list ||
+      !list.lists ||
+      loadingdeletelist ||
+      loadinggetlistitem ||
+      loadingupdateitemlist
+    ) {
       dispatch(getIndividualList(paramslistId));
     } else {
       setItems(list.lists);
       setListname(list.listname);
     }
-    if (createitemlist) {
+    if (createitemlist || updateitemlist) {
       setContent("");
       setTimestamp("");
     }
@@ -60,15 +74,27 @@ const ListScreen = () => {
     loadingdeletelist,
     loadinggetlistitem,
     getitemlist,
+    loadingupdateitemlist,
+    updateitemlist,
   ]);
 
   const addItemsHandler = () => {
     if (updatebutton) {
       console.log("data edited");
       // dispatch
+      dispatch(
+        updateItemList({
+          listId: paramslistId,
+          itemId: itemIdUpdate,
+          content: content,
+          timestamp: timestamp,
+        })
+      );
       setUpdatebutton(false);
       setContent("");
       setTimestamp("");
+      setItemIdUpdate("");
+      dispatch({ type: UPDATE_LIST_ITEM_RESET });
     } else {
       dispatch(
         postCreateItemList({
@@ -88,6 +114,7 @@ const ListScreen = () => {
     );
   };
   const editItemHandler = (itemId) => {
+    setItemIdUpdate(itemId);
     dispatch(
       getGetItemList({
         listId: paramslistId,

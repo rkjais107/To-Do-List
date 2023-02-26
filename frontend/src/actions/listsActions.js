@@ -20,6 +20,9 @@ import {
   INDIVIDUAL_LIST_FAIL,
   INDIVIDUAL_LIST_REQUEST,
   INDIVIDUAL_LIST_SUCCESS,
+  UPDATE_LIST_ITEM_FAIL,
+  UPDATE_LIST_ITEM_REQUEST,
+  UPDATE_LIST_ITEM_SUCCESS,
 } from "../constants/listsConstants";
 import axios from "axios";
 
@@ -209,6 +212,39 @@ export const getGetItemList = ({ listId, itemId }) => async (
   } catch (error) {
     dispatch({
       type: GET_LIST_ITEM_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateItemList = ({
+  listId,
+  itemId,
+  content,
+  timestamp,
+}) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: UPDATE_LIST_ITEM_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.put(
+      `/api/list/${listId}/edit/${itemId}`,
+      { content: content, timestamp: timestamp },
+      config
+    ); //backend route
+    dispatch({
+      type: UPDATE_LIST_ITEM_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_LIST_ITEM_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
