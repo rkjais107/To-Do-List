@@ -4,6 +4,7 @@ dotenv.config(); // to read the files from  enviornment variable
 import colors from "colors";
 import connectDB from "./config/db.js";
 import listRoutes from "./routes/listRoutes.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 connectDB();
 
 // Global constants
