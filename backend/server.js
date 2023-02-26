@@ -4,6 +4,7 @@ dotenv.config(); // to read the files from  enviornment variable
 import colors from "colors";
 import connectDB from "./config/db.js";
 import listRoutes from "./routes/listRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 connectDB();
 
@@ -14,7 +15,10 @@ const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Body parser
+
+// Routes
 app.use("/api/list", listRoutes);
+app.use("/api/users", userRoutes);
 // Root route
 app.get("/", (req, res) => {
   res.json({ message: "Hello from the server." });
