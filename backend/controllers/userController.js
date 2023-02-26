@@ -17,10 +17,9 @@ const hashPassword = async (password) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  console.log(name, email, password);
   try {
     const { name, email, password } = req.body;
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -49,6 +48,23 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
   try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(400).json({ message: "Passord is incorrect" });
+    }
+    const token = signToken(user);
+    res.status(200).json({
+      message: "User Login successfully",
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: token,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
