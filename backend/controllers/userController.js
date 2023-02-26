@@ -14,7 +14,7 @@ const hashPassword = async (password) => {
 };
 
 // @desc    Register a new user
-// @route   POST /api/users
+// @route   POST /api/users/register
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   try {
@@ -44,7 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Auth/login user and get token
-// @route   POST /api/users/logout
+// @route   POST /api/users/login
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
   try {
@@ -70,4 +70,19 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser };
+// @desc    Logout a user and clear a token
+// @route   POST /api/users/logout
+// @access  Public
+const logoutUser = asyncHandler(async (req, res) => {
+  try {
+    const token = "";
+    res.status(200).json({
+      message: "User logout successfully",
+      token: token,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+export { registerUser, loginUser, logoutUser };
