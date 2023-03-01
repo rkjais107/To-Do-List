@@ -24,7 +24,11 @@ const reducer = combineReducers({
   updateListItem: updateListItemReducer,
 });
 
-const initialState = {};
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : null;
+
+const initialState = { userLogin: { userInfo: userInfoFromStorage } };
 const middleware = [thunk];
 
 const store = createStore(
