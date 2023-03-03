@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Button, Container, Form, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../actions/userActions";
 
@@ -11,6 +12,17 @@ const LoginScreen = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  const redirect = location.search ? location.search.split("=")[1] : "/home";
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -58,6 +70,16 @@ const LoginScreen = () => {
               Sign In
             </Button>
           </Form>
+          <Row className="py-3">
+            <Col>
+              New User?{" "}
+              <Link
+                to={redirect ? `/register?redirect=${redirect}` : "/register"}
+              >
+                Register
+              </Link>
+            </Col>
+          </Row>
         </Row>
       </Container>
     </div>
