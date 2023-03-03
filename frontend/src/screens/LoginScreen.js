@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../actions/userActions";
 
 const LoginScreen = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const dispatch = useDispatch();
 
   const loginHandler = (e) => {
     e.preventDefault();
