@@ -1,30 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { registerUser } from "../actions/userActions";
+import FormContainer from "../components/FormContainer";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
-  const loginHandler = (e) => {
+  const redirect = location.search ? location.search.split("=")[1] : "/home";
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, userInfo, redirect]);
+
+  const registerHandler = (e) => {
     e.preventDefault();
-    dispatch(registerUser(name, email, password));
+    if (password !== confirmPassword) {
+      setMessage("Password do not match");
+    } else {
+      dispatch(registerUser(name, email, password));
+    }
   };
 
   return (
     <div>
-      <h1>Register Screen</h1>
-      <Container
+      <FormContainer
         style={{ backgroundColor: "red", height: "500px", width: "100%" }}
       >
-        <Row
-          style={{ backgroundColor: "yellow", height: "500px", width: "100%" }}
-        >
-          <Form onSubmit={loginHandler}>
+        <h1>Register</h1>
+        {message && <Message variant="danger">{message}</Message>}
+        {error && <Message variant="danger">{error}</Message>}
+        {loading && <Loader />}
+        <Row style={{ height: "500px", width: "100%" }}>
+          <Form onSubmit={registerHandler}>
             <Form.Group controlId="name" className="form-margin">
               <Form.Label>
                 <strong>Name</strong>
@@ -61,7 +85,20 @@ const RegisterScreen = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                autoComplete="none"
+                autoComplete="new-password"
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="confirmPassword" className="form-margin">
+              <Form.Label>
+                <strong>Confirm Password</strong>
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                autoComplete="new-password"
+                required
               ></Form.Control>
             </Form.Group>
             <Button type="submit" variant="primary" className="form-margin">
@@ -70,7 +107,7 @@ const RegisterScreen = () => {
             </Button>
           </Form>
         </Row>
-      </Container>
+      </FormContainer>
     </div>
   );
 };
