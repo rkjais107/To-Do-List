@@ -8,8 +8,11 @@ import HomeScreen from "./screens/HomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RootScreen from "./screens/RootScreen";
+import { useSelector } from "react-redux";
 
 function App() {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   return (
     <Router>
       <Header />
@@ -19,8 +22,12 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
             <Route path="/list/:listId" element={<ListScreen />} />
-            <Route path="/home" element={<HomeScreen />} />
-            <Route path="/" element={<RootScreen />} />
+            {userInfo ? (
+              <Route path="/home" element={<HomeScreen />} />
+            ) : (
+              <Route path="/login" element={<LoginScreen />} />
+            )}
+            {!userInfo && <Route path="/" element={<RootScreen />} />}
           </Routes>
         </Container>
       </main>

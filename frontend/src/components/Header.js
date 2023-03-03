@@ -25,9 +25,16 @@ const Header = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
       <Container>
-        <LinkContainer to="/">
-          <Navbar.Brand onClick={resetHandler}>To-Do List</Navbar.Brand>
-        </LinkContainer>
+        {!userInfo && (
+          <LinkContainer to="/">
+            <Navbar.Brand onClick={resetHandler}>To-Do List</Navbar.Brand>
+          </LinkContainer>
+        )}
+        {userInfo && (
+          <LinkContainer to="/home">
+            <Navbar.Brand onClick={resetHandler}>To-Do List</Navbar.Brand>
+          </LinkContainer>
+        )}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {/* <Nav className="me-auto">
