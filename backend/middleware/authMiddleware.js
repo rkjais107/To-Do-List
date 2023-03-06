@@ -3,7 +3,7 @@ import asyncHandler from "express-async-handler";
 import dotenv from "dotenv";
 dotenv.config();
 const secretKey = process.env.JWT_SECRET;
-
+// console.log(secretKey);
 const verifyToken = asyncHandler(async (req, res, next) => {
   // console.log(req.headers);
   if (req.headers.authorization) {

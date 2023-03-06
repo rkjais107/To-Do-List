@@ -9,13 +9,14 @@ import {
   getLists,
   updateListItem,
 } from "../controllers/listController.js";
+import { verifyToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 // @desc Get a list and Create a list
 // @route GET /api/list and POST /api/list
 // @access Public
-router.route("/").get(getLists).post(createList);
+router.route("/").get(verifyToken, getLists).post(verifyToken, createList);
 
 // @desc Add a list Item
 // @route POST /api/list/:id

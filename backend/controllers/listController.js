@@ -1,13 +1,18 @@
 import asyncHandler from "express-async-handler";
 import List from "../models/listModel.js";
+import User from "../models/userModel.js";
 
 // @desc Get a list
 // @route GET /api/list
 // @access Public
 const getLists = asyncHandler(async (req, res) => {
   try {
-    const lists = await List.find();
-    res.json(lists);
+    // console.log(req.user);
+    const user = await User.findById(req.user.userId);
+    // console.log(user);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    const todolists = user.todolists;
+    res.json(todolists);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -33,18 +38,21 @@ const getList = asyncHandler(async (req, res) => {
 // @access Public
 const createList = asyncHandler(async (req, res) => {
   try {
+    const user = await User.findById(req.user.userId);
+    // console.log(user);
+    if (!user) return res.status(404).json({ message: "User not found" });
     // console.log(req.body);
     const { listname, content, timestamp } = req.body;
     const newListItem = {
       content,
       timestamp,
     };
-    const lists = new List({
+    const todolists = {
       listname: listname,
       lists: [newListItem],
-    });
-
-    await lists.save();
+    };
+    user.todolists.push(todolists);
+    await user.save();
     res.status(201).json({ message: "List created successfully." });
   } catch (error) {
     res.status(500).json({ message: error.message });
