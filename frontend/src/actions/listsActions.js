@@ -29,9 +29,13 @@ import axios from "axios";
 export const getAllLists = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ALL_LISTS_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
     const { data } = await axios.get("/api/list", config);
@@ -80,9 +84,13 @@ export const postCreateList = (listname, content, timestamp) => async (
 ) => {
   try {
     dispatch({ type: CREATE_LIST_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
     const { data } = await axios.post(
