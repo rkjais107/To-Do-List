@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../actions/userActions";
+import FormContainer from "../components/FormContainer";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -31,13 +34,14 @@ const LoginScreen = () => {
 
   return (
     <div>
-      <h1>Login Screen</h1>
-      <Container
+      <FormContainer
         style={{ backgroundColor: "red", height: "500px", width: "100%" }}
       >
-        <Row
-          style={{ backgroundColor: "yellow", height: "500px", width: "100%" }}
-        >
+        <h1>Login</h1>
+        {/* {message && <Message variant="danger">{message}</Message>} */}
+        {error && <Message variant="danger">{error}</Message>}
+        {loading && <Loader />}
+        <Row style={{ height: "500px", width: "100%" }}>
           <Form onSubmit={loginHandler}>
             <Form.Group controlId="email" className="form-margin">
               <Form.Label>
@@ -81,7 +85,7 @@ const LoginScreen = () => {
             </Col>
           </Row>
         </Row>
-      </Container>
+      </FormContainer>
     </div>
   );
 };
